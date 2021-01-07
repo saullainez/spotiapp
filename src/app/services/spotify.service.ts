@@ -10,8 +10,15 @@ export class SpotifyService {
 
   getNewReleases() {
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQDnMlLykmTSRoaMr3yJNDRiarIXIQL8YRTn7N2x0sau4kbTa5-38V8UbNEPrcbvFZnVFZRY0-Lf-ruuh6s'
+      'Authorization': 'Bearer BQClRhGkEMiWl0xZAh573Er11Rk8ZrriwQgOtV1z-IJjLFFLS4pBSaPqAK_Yx4tg_WEp5-WayDGotHg_hVw'
     });
     return this.http.get('https://api.spotify.com/v1/browse/new-releases?limit=20', {headers});
+  }
+
+  getArtist(termino : string) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer BQClRhGkEMiWl0xZAh573Er11Rk8ZrriwQgOtV1z-IJjLFFLS4pBSaPqAK_Yx4tg_WEp5-WayDGotHg_hVw'
+    });
+    return this.http.get(`https://api.spotify.com/v1/search?q=${termino}&type=artist&limit=15`, {headers});
   }
 }
