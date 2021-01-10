@@ -36,7 +36,9 @@ hr {
     height: 50px;
 }
 
-
+.table{
+    color: white;
+}
 /* Animaciones */
 
 .animated {
