@@ -28,26 +28,30 @@ export class ArtistComponent implements OnInit {
 
   getArtist(id:string){
     this.loading = true;
-    this.spotify.getArtist(id).subscribe(artist => {
-      this.artist = artist;
-      this.loading = false;
-    }, (serviceError) => {
-      this.error = true;
-      this.loading = false;
-      this.msjError = serviceError.error.error.message;
-      console.log(serviceError);
+    this.spotify.getToken().subscribe(token => {
+      this.spotify.getArtist(id, token).subscribe(artist => {
+        this.artist = artist;
+        this.loading = false;
+      }, (serviceError) => {
+        this.error = true;
+        this.loading = false;
+        this.msjError = serviceError.error.error.message;
+        console.log(serviceError);
+      })
     })
+
   }
 
   getTopTracks(id:string){
-    this.spotify.getTopTracks(id).subscribe(topTracks => {
-      this.topTracks = topTracks;
-    }, (serviceError) => {
-      this.error = true;
-      this.loading = false;
-      this.msjError = serviceError.error.error.message;
-      console.log(serviceError);
+    this.spotify.getToken().subscribe(token => {
+      this.spotify.getTopTracks(id, token).subscribe(topTracks => {
+        this.topTracks = topTracks;
+      }, (serviceError) => {
+        this.error = true;
+        this.loading = false;
+        this.msjError = serviceError.error.error.message;
+        console.log(serviceError);
+      })
     })
   }
-
 }

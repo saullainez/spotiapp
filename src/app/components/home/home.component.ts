@@ -18,15 +18,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.spotify.getNewReleases().subscribe((data : any) => {
-      this.nuevasCanciones = data;
-      this.loading = false;
-    }, (serviceError) => {
-      this.error = true;
-      this.loading = false;
-      this.msjError = serviceError.error.error.message;
-      console.log(serviceError);
-    });
+    this.spotify.getToken().subscribe(token => {
+      this.spotify.getNewReleases(token).subscribe((data : any) => {
+        this.nuevasCanciones = data;
+        this.loading = false;
+      }, (serviceError) => {
+        this.error = true;
+        this.loading = false;
+        this.msjError = serviceError.error.error.message;
+        console.log(serviceError);
+      });
+    })
+
   }
 
 }
